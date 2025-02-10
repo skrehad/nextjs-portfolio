@@ -3,7 +3,6 @@
 import { FaGithub, FaLinkedin, FaFacebook, FaDownload } from "react-icons/fa";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
-// import resume from "../../assets/Web-Developer-Resume-Rehad.pdf";
 import photo from "../../assets/rehad.jpg";
 import { fadeIn } from "@/src/variants";
 import Link from "next/link";

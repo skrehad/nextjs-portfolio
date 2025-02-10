@@ -111,7 +111,7 @@ const MyEducation = () => {
             data-aos="zoom-in-down"
             className="text-2xl font-semibold text-center text-orange-300 pt-20 pb-10"
           >
-            Special Short Courses
+            Skills Development Courses
           </h1>
         </div>
         <div className="text-white">

@@ -1,0 +1,9 @@
+.image {
+  background-size: cover;
+  background-position: top left;
+  transition: ease-in-out 8s;
+  background-repeat: no-repeat;
+}
+.image:hover {
+  background-position: bottom;
+}
