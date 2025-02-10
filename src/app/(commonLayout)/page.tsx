@@ -8,7 +8,7 @@ import React from "react";
 
 const HomePage = () => {
   return (
-    <div className="mx-20">
+    <div className="mx-4 sm:mx-8 md:mx-12 lg:mx-20 xl:mx-24">
       <Banner></Banner>
       <About></About>
       <Services></Services>
