@@ -145,7 +145,7 @@ const About = () => {
             </p>
 
             {/* Stats Section */}
-            <div className="flex justify-center lg:justify-start gap-10 text-center">
+            <div className="flex justify-center lg:gap-20  gap-10 text-center">
               <div>
                 <div className="text-[40px] font-bold text-orange-200">
                   {inView ? <CountUp start={0} end={2} duration={3} /> : null}

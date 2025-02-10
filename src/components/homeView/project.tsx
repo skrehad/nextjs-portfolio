@@ -240,6 +240,17 @@ const Project = () => {
           </span>
         </h2>
       </div>
+
+      <div className=" text-center my-10">
+        <a
+          href="/projects"
+          target="_blank"
+          rel="noreferrer"
+          className="btn px-4 py-2 border-2 rounded-lg text-white hover:bg-orange-400 transition-all"
+        >
+          More Projects
+        </a>
+      </div>
     </div>
   );
 };
