@@ -2,8 +2,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { signOut } from "next-auth/react";
 
-const Navbar = () => {
+type UserProps = {
+  user?: {
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+  };
+};
+
+const Navbar = ({ session }: { session: UserProps | null }) => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
@@ -30,6 +39,18 @@ const Navbar = () => {
           >
             Home
           </Link>
+
+          {session?.user && (
+            <Link
+              href="/dashboard"
+              className={`font-bold hover:text-gray-300 transition-colors ${
+                pathname === "/dashboard" ? "text-orange-300" : ""
+              }`}
+            >
+              Dashboard
+            </Link>
+          )}
+
           <Link
             href="/projects"
             className={
@@ -60,16 +81,29 @@ const Navbar = () => {
           >
             Contact
           </Link>
-          <Link
-            href="/login"
-            className={
-              pathname === "/login"
-                ? "text-orange-300"
-                : "hover:text-gray-500 font-bold"
-            }
-          >
-            Login
-          </Link>
+          {session?.user ? (
+            <button
+              onClick={() => signOut()}
+              className={
+                pathname === "/contact"
+                  ? "text-orange-300"
+                  : "hover:text-gray-500 font-bold"
+              }
+            >
+              Logout
+            </button>
+          ) : (
+            <Link
+              href="/login"
+              className={
+                pathname === "/contact"
+                  ? "text-orange-300"
+                  : "hover:text-gray-500 font-bold"
+              }
+            >
+              Login
+            </Link>
+          )}
         </div>
 
         {/* Mobile Menu Button */}

@@ -1,10 +1,13 @@
 import Footer from "@/src/components/shared/footer";
 import Navbar from "@/src/components/shared/nabvar";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../utils/authOptions";
 
-const CommonLayout = ({ children }: { children: React.ReactNode }) => {
+const CommonLayout = async ({ children }: { children: React.ReactNode }) => {
+  const session = await getServerSession(authOptions);
   return (
     <div>
-      <Navbar />
+      <Navbar session={session} />
       <div className="min-h-screen">{children}</div>
       <Footer />
     </div>

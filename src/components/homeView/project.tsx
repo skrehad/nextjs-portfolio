@@ -163,7 +163,7 @@ const Project = () => {
       </div>
 
       {/* Project Details */}
-      <div className="max-w-6xl mx-auto px-5">
+      <div className=" mx-auto px-5">
         <h1 className="text-4xl text-center mb-2 font-bold">
           Website Name: <span className="text-yellow-400">Hotel Booking</span>
         </h1>
