@@ -72,7 +72,7 @@ export default function AddProject() {
 
     try {
       setLoading(true);
-      await axios.post("/api/projects", {
+      await axios.post("http://localhost:5000/api/projects", {
         ...formData,
         details: detailsArray,
         technologies: technologiesArray,
