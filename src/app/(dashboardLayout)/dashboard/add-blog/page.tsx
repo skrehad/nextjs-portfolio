@@ -46,7 +46,7 @@ export default function AddBlog() {
         image: imageUrl,
         author: user,
       };
-      console.log(blogData);
+      // console.log(blogData);
 
       await axios.post("http://localhost:5000/api/blogs", blogData, {
         headers: {
