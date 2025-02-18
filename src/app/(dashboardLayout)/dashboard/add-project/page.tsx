@@ -12,7 +12,7 @@ interface ProjectFormData {
   liveLink: string;
   frontendGithubLink: string;
   backendGithubLink?: string;
-  image?: File;
+  image: File;
 }
 
 export default function AddProject() {
@@ -48,16 +48,6 @@ export default function AddProject() {
         setLoading(false);
         return;
       }
-
-      // const uploadData = new FormData();
-      // uploadData.append("file", image);
-      // uploadData.append("upload_preset", "md_rehad");
-
-      // const response = await axios.post(
-      //   "https://api.cloudinary.com/v1_1/dz43bufkc/image/upload",
-
-      //   uploadData
-      // );
 
       const imageFile = image;
 

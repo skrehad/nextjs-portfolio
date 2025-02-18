@@ -1,20 +1,19 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { fadeIn } from "@/src/variants";
 import axios from "axios";
 
 interface Project {
-  id: number;
+  _id: string;
   name: string;
   type: string;
-  img: string;
-  liveSite: string;
-  clientSite: string;
-  serverSite?: string; // optional field
+  image: string;
+  liveLink: string;
+  frontendGithubLink: string;
+  backendGithubLink?: string;
 }
 
 const ProjectsPage = () => {
@@ -25,108 +24,74 @@ const ProjectsPage = () => {
       try {
         const response = await axios.get("http://localhost:5000/api/projects");
         setProjects(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error("Error fetching projects:", error);
       }
     };
 
-    fetchProjects(); // Call the fetch function
+    fetchProjects();
   }, []);
 
   return (
-    <div>
-      <section className="section lg:mb-64 lg:mt-80" id="work">
-        <div className="container mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-10">
+    <section className="container mx-auto px-5 py-10">
+      <h2 className="text-3xl md:text-4xl font-bold text-center text-orange-300 mb-6">
+        My Latest Work
+      </h2>
+      <p className="text-center max-w-lg mx-auto mb-10 text-gray-300">
+        I believe in pushing the boundaries of web design, ensuring each website
+        I create is a unique masterpiece.
+      </p>
+
+      {projects.length === 0 ? (
+        <p className="text-center">Loading projects...</p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.map((project) => (
             <motion.div
-              variants={fadeIn("up", 0.3)}
-              initial="hidden"
-              whileInView={"show"}
-              viewport={{ once: false, amount: 0.7 }}
+              key={project._id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="bg-gray-800 p-4 rounded-lg shadow-lg"
             >
-              <h2 className="h2 text-orange-200 leading-light">
-                My Latest <br />
-                Work
-              </h2>
-              <p className="max-w-sm mb-16">
-                I believe in pushing the boundaries of web design, ensuring each
-                website I create is a unique masterpiece.
-              </p>
-              <Link href="/projects">
-                <button className="btn btn-sm mb-4">View all projects</button>
-              </Link>
+              <img
+                src={project.image}
+                alt={project.name}
+                className="w-full h-48 object-cover rounded-md mb-4"
+              />
+              <h3 className="text-xl font-bold text-white">{project.name}</h3>
+              <p className="text-sm text-orange-300 mb-4">{project.type}</p>
+              <div className="flex gap-3">
+                <Link href={project.liveLink} target="_blank">
+                  <button className="btn btn-sm bg-blue-500 text-white">
+                    Live Site
+                  </button>
+                </Link>
+                <Link href={project.frontendGithubLink} target="_blank">
+                  <button className="btn btn-sm bg-green-500 text-white">
+                    Client
+                  </button>
+                </Link>
+                {project.backendGithubLink && (
+                  <Link href={project.backendGithubLink} target="_blank">
+                    <button className="btn btn-sm bg-purple-500 text-white">
+                      Server
+                    </button>
+                  </Link>
+                )}
+              </div>
+              <div className="mt-4">
+                <Link href={`/projects/${project._id}`}>
+                  <button className="btn btn-sm bg-yellow-500 text-black w-full">
+                    Show Details
+                  </button>
+                </Link>
+              </div>
             </motion.div>
-
-            {projects.map((project) => (
-              <motion.div
-                key={project.id}
-                variants={fadeIn("up", 0.3)}
-                initial="hidden"
-                whileInView={"show"}
-                viewport={{ once: false, amount: 0.7 }}
-                className=" mb-10 lg:mb-0"
-              >
-                <div className="group relative overflow-hidden border-2 border-white/50 rounded-xl">
-                  <div className="group-hover:bg-black/70 w-full h-full absolute z-40 translate-all duration-300"></div>
-                  <img
-                    className="group-hover:scale-125 w-full h-[315px] translate-all duration-500"
-                    src={project.img}
-                    alt=""
-                  />
-                  <div className="absolute text-center w-full bottom-full group-hover:bottom-60 transition-all duration-700 z-50">
-                    <span className="text-gradient">{project.type}</span>
-                  </div>
-                  <div className="absolute text-center w-full bottom-full group-hover:bottom-48 transition-all duration-700 z-50">
-                    <span className="text-3xl text-white">
-                      Name: {project.name}
-                    </span>
-                  </div>
-
-                  <div className="absolute w-full mx-2 text-center gap-2 grid grid-cols-3 bottom-full group-hover:bottom-32 transition-all duration-700 z-50">
-                    <Link
-                      href={project.liveSite}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <button className="btn w-full btn-sm">Live Site</button>
-                    </Link>
-                    <Link
-                      href={project.clientSite}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <button className="btn btn-sm">Client-Side</button>
-                    </Link>
-                    {project.serverSite ? (
-                      <Link
-                        href={project.serverSite}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <button className="btn btn-sm">Server-Side</button>
-                      </Link>
-                    ) : (
-                      <button className="btn btn-sm">No Server-Site</button>
-                    )}
-                  </div>
-                  <div className="absolute w-full text-center bottom-full group-hover:bottom-16 transition-all duration-700 z-50">
-                    <Link href={`/project/${project.id}`}>
-                      <button className="btn btn-sm">
-                        Show Project Details
-                      </button>
-                    </Link>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          ))}
         </div>
-      </section>
-      <div className="text-center">
-        <p className="text-2xl">Some Project Coming Soon...</p>
-      </div>
-    </div>
+      )}
+    </section>
   );
 };
 
