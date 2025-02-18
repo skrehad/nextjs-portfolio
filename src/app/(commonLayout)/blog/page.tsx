@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "sonner";
 
 interface Blog {
   _id: string;
@@ -25,7 +27,7 @@ const BlogPage = () => {
       try {
         const response = await axios.get("http://localhost:5000/api/blogs");
         setBlogs(response.data);
-      } catch (error) {
+      } catch (error: any) {
         toast.error("Error fetching blogs:", error);
       } finally {
         setLoading(false);
