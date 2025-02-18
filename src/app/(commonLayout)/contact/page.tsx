@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -41,7 +42,7 @@ export default function ContactForm() {
       }
     } catch (error: any) {
       toast.error("An error occurred while sending your message.");
-      // toast.error(error);
+      toast.error(error);
     } finally {
       setLoading(false);
     }
