@@ -51,7 +51,9 @@ const ManageBlog = () => {
   };
 
   if (loading) {
-    return <div>Loading blog posts...</div>;
+    return (
+      <div className="text-orange-500 text-center mt-20">Loading blogs...</div>
+    );
   }
 
   return (

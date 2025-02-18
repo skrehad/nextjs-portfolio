@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import axios from "axios";
+import { toast } from "sonner";
 
 interface Project {
   _id: string;
@@ -24,8 +25,9 @@ const ProjectsPage = () => {
       try {
         const response = await axios.get("http://localhost:5000/api/projects");
         setProjects(response.data);
-      } catch (error) {
-        console.error("Error fetching projects:", error);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
+        toast.error("Error fetching projects:", error);
       }
     };
 
@@ -63,18 +65,18 @@ const ProjectsPage = () => {
               <p className="text-sm text-orange-300 mb-4">{project.type}</p>
               <div className="flex gap-3">
                 <Link href={project.liveLink} target="_blank">
-                  <button className="btn btn-sm bg-blue-500 text-white">
+                  <button className="btn btn-sm p-2 rounded-md bg-blue-500 text-white">
                     Live Site
                   </button>
                 </Link>
                 <Link href={project.frontendGithubLink} target="_blank">
-                  <button className="btn btn-sm bg-green-500 text-white">
+                  <button className="btn p-2 rounded-md btn-sm bg-green-500 text-white">
                     Client
                   </button>
                 </Link>
                 {project.backendGithubLink && (
                   <Link href={project.backendGithubLink} target="_blank">
-                    <button className="btn btn-sm bg-purple-500 text-white">
+                    <button className="btn btn-sm p-2 rounded-md bg-purple-500 text-white">
                       Server
                     </button>
                   </Link>
