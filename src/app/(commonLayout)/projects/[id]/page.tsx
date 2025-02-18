@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { AiOutlineStar } from "react-icons/ai";
+import { toast } from "sonner";
 
 interface Project {
   _id: string;
@@ -34,7 +36,7 @@ const ProjectDetails = () => {
         const projectData = response.data;
 
         setProject(projectData);
-      } catch (error) {
+      } catch (error: any) {
         toast.error("Error fetching project details:", error);
       } finally {
         setLoading(false);
