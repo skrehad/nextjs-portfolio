@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { toast } from "sonner";
 
 interface BlogFormData {
   title: string;
@@ -23,7 +25,7 @@ export default function AddBlog() {
       const { title, description, image } = formData;
 
       if (image.length === 0) {
-        alert("Please select an image to upload.");
+        toast.warning("Please select an image to upload.");
         setLoading(false);
         return;
       }
@@ -55,10 +57,10 @@ export default function AddBlog() {
       });
 
       console.log("Blog Data:", blogData);
-      alert("Blog post created successfully!");
-    } catch (error) {
+      toast.success("Blog post created successfully!");
+    } catch (error: any) {
       toast.error("Error uploading image:", error);
-      alert("Failed to create blog post.");
+      toast.error("Failed to create blog post.");
     } finally {
       setLoading(false);
     }

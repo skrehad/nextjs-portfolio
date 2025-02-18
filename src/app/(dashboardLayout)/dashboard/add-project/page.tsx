@@ -46,7 +46,7 @@ export default function AddProject() {
       console.log(formData);
 
       if (!image) {
-        toast.error("Please select an image to upload.");
+        toast.warning("Please select an image to upload.");
         setLoading(false);
         return;
       }
