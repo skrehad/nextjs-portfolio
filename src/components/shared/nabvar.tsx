@@ -96,7 +96,7 @@ const Navbar = ({ session }: { session: UserProps | null }) => {
             <Link
               href="/login"
               className={
-                pathname === "/contact"
+                pathname === "/login"
                   ? "text-orange-300"
                   : "hover:text-gray-500 font-bold"
               }

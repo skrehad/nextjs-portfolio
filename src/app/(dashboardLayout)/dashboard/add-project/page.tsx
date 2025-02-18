@@ -1,87 +1,100 @@
 "use client";
+
 import { useState } from "react";
 import axios from "axios";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+interface ProjectFormData {
+  name: string;
+  type: string;
+  details: string;
+  technologies: string;
+  liveLink: string;
+  frontendGithubLink: string;
+  backendGithubLink?: string;
+  image?: File;
+}
 
 export default function AddProject() {
-  const [formData, setFormData] = useState<{
-    name: string;
-    type: string;
-    images: string[];
-    details: string;
-    technologies: string;
-    liveLink: string;
-    frontendGithubLink: string;
-    backendGithubLink?: string;
-  }>({
-    name: "",
-    type: "",
-    images: [],
-    details: "",
-    technologies: "",
-    liveLink: "",
-    frontendGithubLink: "",
-    backendGithubLink: "",
-  });
-
   const [loading, setLoading] = useState(false);
 
-  const handleFileUpload = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const files = event.target.files;
-    if (!files || files.length !== 5) {
-      alert("You must upload exactly 5 images!");
-      return;
+  const { register, handleSubmit, setValue } = useForm<ProjectFormData>();
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files ? event.target.files[0] : null;
+    if (file) {
+      setValue("image", file);
     }
+  };
 
-    setLoading(true);
-    const uploadedImages = [];
+  const onSubmit: SubmitHandler<ProjectFormData> = async (formData) => {
+    try {
+      setLoading(true);
 
-    for (let i = 0; i < files.length; i++) {
-      const data = new FormData();
-      data.append("file", files[i]);
-      data.append("upload_preset", "md_rehad");
+      const {
+        name,
+        type,
+        details,
+        technologies,
+        liveLink,
+        frontendGithubLink,
+        backendGithubLink,
+        image,
+      } = formData;
+      console.log(formData);
+
+      if (!image) {
+        alert("Please select an image to upload.");
+        setLoading(false);
+        return;
+      }
+
+      // const uploadData = new FormData();
+      // uploadData.append("file", image);
+      // uploadData.append("upload_preset", "md_rehad");
+
+      // const response = await axios.post(
+      //   "https://api.cloudinary.com/v1_1/dz43bufkc/image/upload",
+
+      //   uploadData
+      // );
+
+      const imageFile = image;
+
+      const uploadData = new FormData();
+      uploadData.append("file", imageFile);
+      uploadData.append("upload_preset", "md_rehad");
 
       const response = await axios.post(
         "https://api.cloudinary.com/v1_1/dz43bufkc/image/upload",
-        data
+        uploadData
       );
 
-      uploadedImages.push(response.data.secure_url);
-    }
+      const imageUrl = response.data.secure_url;
 
-    setFormData({ ...formData, images: uploadedImages });
-    setLoading(false);
-  };
+      const projectData = {
+        name,
+        type,
+        details,
+        technologies,
+        liveLink,
+        frontendGithubLink,
+        backendGithubLink,
+        image: imageUrl,
+      };
+      console.log(projectData);
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-
-    console.log("Form Data Before Submit:", formData);
-    const detailsArray = formData.details
-      .split(".")
-      .filter((sentence) => sentence.trim() !== "");
-    const technologiesArray = formData.technologies
-      .split(",")
-      .map((tech) => tech.trim());
-
-    if (formData.images.length !== 5) {
-      alert("Please upload exactly 5 images.");
-      return;
-    }
-
-    try {
-      setLoading(true);
-      await axios.post("http://localhost:5000/api/projects", {
-        ...formData,
-        details: detailsArray,
-        technologies: technologiesArray,
+      await axios.post("http://localhost:5000/api/projects", projectData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
-      alert("Project submitted successfully!");
-      setLoading(false);
+
+      alert("Project added successfully!");
     } catch (error) {
-      console.error(error);
-      alert("Something went wrong!");
+      console.error("Error uploading image:", error);
+      alert("Failed to add project.");
+    } finally {
       setLoading(false);
     }
   };
@@ -89,7 +102,7 @@ export default function AddProject() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900">
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         className="bg-gray-800 p-6 rounded-lg w-[500px] space-y-4"
       >
         <h2 className="text-white text-xl font-bold">Add New Project</h2>
@@ -98,15 +111,13 @@ export default function AddProject() {
           type="text"
           placeholder="Project Name"
           className="w-full bg-gray-700 text-white p-2 rounded"
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          {...register("name")}
           required
         />
 
         <select
           className="w-full bg-gray-700 text-white p-2 rounded"
-          value={formData.type}
-          onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+          {...register("type")}
           required
         >
           <option value="">Select Project Type</option>
@@ -118,10 +129,7 @@ export default function AddProject() {
         <textarea
           placeholder="Project Details (Each sentence separated by a dot)"
           className="w-full bg-gray-700 text-white p-2 rounded"
-          value={formData.details}
-          onChange={(e) =>
-            setFormData({ ...formData, details: e.target.value })
-          }
+          {...register("details")}
           required
         ></textarea>
 
@@ -129,10 +137,7 @@ export default function AddProject() {
           type="text"
           placeholder="Technologies (comma separated)"
           className="w-full bg-gray-700 text-white p-2 rounded"
-          value={formData.technologies}
-          onChange={(e) =>
-            setFormData({ ...formData, technologies: e.target.value })
-          }
+          {...register("technologies")}
           required
         />
 
@@ -140,10 +145,7 @@ export default function AddProject() {
           type="text"
           placeholder="Live Link"
           className="w-full bg-gray-700 text-white p-2 rounded"
-          value={formData.liveLink}
-          onChange={(e) =>
-            setFormData({ ...formData, liveLink: e.target.value })
-          }
+          {...register("liveLink")}
           required
         />
 
@@ -151,10 +153,7 @@ export default function AddProject() {
           type="text"
           placeholder="Frontend GitHub Link"
           className="w-full bg-gray-700 text-white p-2 rounded"
-          value={formData.frontendGithubLink}
-          onChange={(e) =>
-            setFormData({ ...formData, frontendGithubLink: e.target.value })
-          }
+          {...register("frontendGithubLink")}
           required
         />
 
@@ -162,15 +161,11 @@ export default function AddProject() {
           type="text"
           placeholder="Backend GitHub Link (Optional)"
           className="w-full bg-gray-700 text-white p-2 rounded"
-          value={formData.backendGithubLink}
-          onChange={(e) =>
-            setFormData({ ...formData, backendGithubLink: e.target.value })
-          }
+          {...register("backendGithubLink")}
         />
 
         <input
           type="file"
-          multiple
           accept="image/*"
           className="w-full bg-gray-700 text-white p-2 rounded"
           onChange={handleFileUpload}

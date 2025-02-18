@@ -57,7 +57,7 @@ const ManageBlog = () => {
   return (
     <div className="min-h-screen bg-gray-900 p-4">
       <h2 className="text-2xl font-bold mb-10 text-center text-orange-400">
-        Manage Blog Posts
+        Manage Blog Post
       </h2>
       <div className="space-y-4">
         {blogs.map((blog) => (
