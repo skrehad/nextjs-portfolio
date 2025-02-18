@@ -57,7 +57,7 @@ export default function AddBlog() {
       console.log("Blog Data:", blogData);
       alert("Blog post created successfully!");
     } catch (error) {
-      console.error("Error uploading image:", error);
+      toast.error("Error uploading image:", error);
       alert("Failed to create blog post.");
     } finally {
       setLoading(false);

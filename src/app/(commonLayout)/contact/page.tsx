@@ -41,7 +41,7 @@ export default function ContactForm() {
       }
     } catch (error) {
       toast.error("An error occurred while sending your message.");
-      console.error(error);
+      toast.error(error);
     } finally {
       setLoading(false);
     }

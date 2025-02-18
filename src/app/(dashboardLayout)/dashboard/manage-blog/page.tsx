@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "sonner";
 
 interface Blog {
   _id: string;
@@ -27,8 +29,8 @@ const ManageBlog = () => {
       try {
         const response = await axios.get("http://localhost:5000/api/blogs");
         setBlogs(response.data);
-      } catch (error) {
-        console.error("Error fetching blogs:", error);
+      } catch (error: any) {
+        toast.error("Error fetching blogs:", error);
       } finally {
         setLoading(false);
       }
@@ -36,16 +38,15 @@ const ManageBlog = () => {
     fetchBlogs();
   }, []);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const deleteBlog = async (id: any) => {
     if (window.confirm("Are you sure you want to delete this blog post?")) {
       try {
         await axios.delete(`http://localhost:5000/api/blogs/${id}`);
         setBlogs(blogs.filter((blog) => blog._id !== id));
-        alert("Blog post deleted successfully!");
-      } catch (error) {
-        console.error("Error deleting blog post:", error);
-        alert("Failed to delete the blog post.");
+        toast.success("Blog post deleted successfully!");
+      } catch (error: any) {
+        toast.error("Error deleting blog post:", error);
+        toast.error("Failed to delete the blog post.");
       }
     }
   };

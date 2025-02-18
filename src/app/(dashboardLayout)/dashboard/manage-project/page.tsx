@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "sonner";
 
 const ManageProject = () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -15,8 +16,8 @@ const ManageProject = () => {
       try {
         const response = await axios.get("http://localhost:5000/api/projects");
         setProjects(response.data);
-      } catch (error) {
-        console.error("Error fetching projects:", error);
+      } catch (error: any) {
+        toast.error("Error fetching projects:", error);
       } finally {
         setLoading(false);
       }
@@ -32,16 +33,20 @@ const ManageProject = () => {
       try {
         await axios.delete(`http://localhost:5000/api/projects/${id}`);
         setProjects(projects.filter((project) => project._id !== id));
-        alert("Project deleted successfully!");
-      } catch (error) {
-        console.error("Error deleting project:", error);
-        alert("Failed to delete the project.");
+        toast.success("Project deleted successfully!");
+      } catch (error: any) {
+        toast.error("Error deleting project:", error);
+        toast.error("Failed to delete the project.");
       }
     }
   };
 
   if (loading) {
-    return <div>Loading projects...</div>;
+    return (
+      <div className="text-orange-500 text-center mt-20">
+        Loading Projects...
+      </div>
+    );
   }
 
   return (

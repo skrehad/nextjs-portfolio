@@ -82,7 +82,7 @@ export default function AddProject() {
 
       alert("Project added successfully!");
     } catch (error) {
-      console.error("Error uploading image:", error);
+      toast.error("Error uploading image:", error);
       alert("Failed to add project.");
     } finally {
       setLoading(false);

@@ -35,7 +35,7 @@ const ProjectDetails = () => {
 
         setProject(projectData);
       } catch (error) {
-        console.error("Error fetching project details:", error);
+        toast.error("Error fetching project details:", error);
       } finally {
         setLoading(false);
       }
