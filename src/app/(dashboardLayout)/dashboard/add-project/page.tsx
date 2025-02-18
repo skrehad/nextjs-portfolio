@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
 import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { toast } from "sonner";
 
 interface ProjectFormData {
   name: string;
@@ -44,7 +46,7 @@ export default function AddProject() {
       console.log(formData);
 
       if (!image) {
-        alert("Please select an image to upload.");
+        toast.error("Please select an image to upload.");
         setLoading(false);
         return;
       }
@@ -80,10 +82,10 @@ export default function AddProject() {
         },
       });
 
-      alert("Project added successfully!");
-    } catch (error) {
+      toast.success("Project added successfully!");
+    } catch (error: any) {
       toast.error("Error uploading image:", error);
-      alert("Failed to add project.");
+      toast.error("Failed to add project.");
     } finally {
       setLoading(false);
     }
