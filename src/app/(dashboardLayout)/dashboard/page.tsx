@@ -95,7 +95,6 @@ export default async function Dashboard() {
             </h3>
             <div className="h-64 w-full bg-gray-700 rounded-lg flex items-center justify-center">
               <div className="bg-bg-gray-700 p-4 rounded-lg h-full w-full">
-                {/* সিম্পল বার চার্ট */}
                 <div className="h-full bg-gray-900  rounded-lg p-4">
                   <div className="flex h-full items-end justify-between">
                     {salesData.map((height, index) => (
@@ -134,20 +133,20 @@ export default async function Dashboard() {
                 <tbody className="bg-gray-800 divide-y divide-gray-700">
                   {[
                     {
-                      activity: "Project Alpha Launch",
-                      date: "2023-10-01",
+                      activity: "Project GYM Website Launch",
+                      date: "2025-02-18",
                       status: "Completed",
                       color: "text-green-400",
                     },
                     {
                       activity: "Blog Post Published",
-                      date: "2023-10-05",
+                      date: "2025-02-10",
                       status: "In Progress",
                       color: "text-yellow-400",
                     },
                     {
-                      activity: "User Feedback Collected",
-                      date: "2023-10-10",
+                      activity: "User SMS Collected",
+                      date: "2025-02-15",
                       status: "Pending",
                       color: "text-red-400",
                     },
