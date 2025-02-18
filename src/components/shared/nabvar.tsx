@@ -84,11 +84,7 @@ const Navbar = ({ session }: { session: UserProps | null }) => {
           {session?.user ? (
             <button
               onClick={() => signOut()}
-              className={
-                pathname === "/contact"
-                  ? "text-orange-300"
-                  : "hover:text-gray-500 font-bold"
-              }
+              className={" hover:text-gray-500 font-bold"}
             >
               Logout
             </button>
@@ -171,6 +167,26 @@ const Navbar = ({ session }: { session: UserProps | null }) => {
           >
             Contact
           </Link>
+
+          {session?.user ? (
+            <button
+              onClick={() => signOut()}
+              className={" hover:text-gray-500 font-bold"}
+            >
+              Logout
+            </button>
+          ) : (
+            <Link
+              href="/login"
+              className={
+                pathname === "/login"
+                  ? "text-orange-300"
+                  : "hover:text-gray-500 font-bold"
+              }
+            >
+              Login
+            </Link>
+          )}
         </div>
       )}
     </nav>
