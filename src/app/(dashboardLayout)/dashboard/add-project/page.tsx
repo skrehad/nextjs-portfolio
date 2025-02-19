@@ -76,11 +76,15 @@ export default function AddProject() {
       };
       console.log(projectData);
 
-      await axios.post("http://localhost:5000/api/projects", projectData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      await axios.post(
+        "https://portfolio-server-1v4q61t0o-skrehads-projects.vercel.app/api/projects",
+        projectData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       toast.success("Project added successfully!");
     } catch (error: any) {

@@ -27,7 +27,9 @@ const ManageBlog = () => {
     const fetchBlogs = async () => {
       setLoading(true);
       try {
-        const response = await axios.get("http://localhost:5000/api/blogs");
+        const response = await axios.get(
+          "https://portfolio-server-1v4q61t0o-skrehads-projects.vercel.app/api/blogs"
+        );
         setBlogs(response.data);
       } catch (error: any) {
         toast.error("Error fetching blogs:", error);
@@ -41,7 +43,9 @@ const ManageBlog = () => {
   const deleteBlog = async (id: any) => {
     if (window.confirm("Are you sure you want to delete this blog post?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/blogs/${id}`);
+        await axios.delete(
+          `https://portfolio-server-1v4q61t0o-skrehads-projects.vercel.app/api/blogs/${id}`
+        );
         setBlogs(blogs.filter((blog) => blog._id !== id));
         toast.success("Blog post deleted successfully!");
       } catch (error: any) {

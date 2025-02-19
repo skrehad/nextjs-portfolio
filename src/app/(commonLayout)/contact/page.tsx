@@ -25,7 +25,7 @@ export default function ContactForm() {
       console.log(formData);
 
       const response = await axios.post(
-        "http://localhost:5000/api/contact",
+        "https://portfolio-server-1v4q61t0o-skrehads-projects.vercel.app/api/contact",
         formData,
         {
           headers: {

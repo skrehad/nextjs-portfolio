@@ -50,11 +50,15 @@ export default function AddBlog() {
       };
       // console.log(blogData);
 
-      await axios.post("http://localhost:5000/api/blogs", blogData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      await axios.post(
+        "https://portfolio-server-1v4q61t0o-skrehads-projects.vercel.app/api/blogs",
+        blogData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       console.log("Blog Data:", blogData);
       toast.success("Blog post created successfully!");

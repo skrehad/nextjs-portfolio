@@ -14,7 +14,9 @@ const ManageProject = () => {
     const fetchProjects = async () => {
       setLoading(true);
       try {
-        const response = await axios.get("http://localhost:5000/api/projects");
+        const response = await axios.get(
+          "https://portfolio-server-1v4q61t0o-skrehads-projects.vercel.app/api/projects"
+        );
         setProjects(response.data);
       } catch (error: any) {
         toast.error("Error fetching projects:", error);
@@ -31,7 +33,9 @@ const ManageProject = () => {
       window.confirm("Are you sure you want to delete this project?")
     ) {
       try {
-        await axios.delete(`http://localhost:5000/api/projects/${id}`);
+        await axios.delete(
+          `https://portfolio-server-1v4q61t0o-skrehads-projects.vercel.app/api/projects/${id}`
+        );
         setProjects(projects.filter((project) => project._id !== id));
         toast.success("Project deleted successfully!");
       } catch (error: any) {
