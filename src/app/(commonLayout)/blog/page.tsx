@@ -26,7 +26,7 @@ const BlogPage = () => {
     const fetchBlogs = async () => {
       try {
         const response = await axios.get(
-          "https://rehad-portfoilo.vercel.app/api/blogs"
+          "https://portfolio-server-mu-woad.vercel.app/api/blogs"
         );
         setBlogs(response.data);
       } catch (error: any) {
