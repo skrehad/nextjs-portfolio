@@ -26,7 +26,7 @@ const BlogPage = () => {
     const fetchBlogs = async () => {
       try {
         const response = await axios.get(
-          "https://portfolio-server-aeebdyebb-skrehads-projects.vercel.app/api/blogs"
+          "https://rehad-portfoilo.vercel.app/api/blogs"
         );
         setBlogs(response.data);
       } catch (error: any) {
@@ -54,7 +54,7 @@ const BlogPage = () => {
         Blog Posts
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {blogs.map((blog) => (
+        {blogs?.map((blog) => (
           <div
             key={blog._id}
             className="bg-gray-800 p-6 rounded-lg text-white shadow-lg hover:shadow-xl transition-all duration-300"

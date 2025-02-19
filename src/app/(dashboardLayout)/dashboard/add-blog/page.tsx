@@ -51,7 +51,7 @@ export default function AddBlog() {
       // console.log(blogData);
 
       await axios.post(
-        "https://portfolio-server-aeebdyebb-skrehads-projects.vercel.app/api/blogs",
+        "https://rehad-portfoilo.vercel.app/api/blogs",
         blogData,
         {
           headers: {

@@ -24,7 +24,7 @@ const ProjectsPage = () => {
     const fetchProjects = async () => {
       try {
         const response = await axios.get(
-          "https://portfolio-server-aeebdyebb-skrehads-projects.vercel.app/api/projects"
+          "https://rehad-portfoilo.vercel.app/api/projects"
         );
         setProjects(response.data);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -46,7 +46,7 @@ const ProjectsPage = () => {
         I create is a unique masterpiece.
       </p>
 
-      {projects.length === 0 ? (
+      {projects?.length === 0 ? (
         <p className="text-center">Loading projects...</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

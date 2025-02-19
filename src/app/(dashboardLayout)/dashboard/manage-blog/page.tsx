@@ -28,7 +28,7 @@ const ManageBlog = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          "https://portfolio-server-aeebdyebb-skrehads-projects.vercel.app/api/blogs"
+          "https://rehad-portfoilo.vercel.app/api/blogs"
         );
         setBlogs(response.data);
       } catch (error: any) {
@@ -44,7 +44,7 @@ const ManageBlog = () => {
     if (window.confirm("Are you sure you want to delete this blog post?")) {
       try {
         await axios.delete(
-          `https://portfolio-server-aeebdyebb-skrehads-projects.vercel.app/api/blogs/${id}`
+          `https://rehad-portfoilo.vercel.app/api/blogs/${id}`
         );
         setBlogs(blogs.filter((blog) => blog._id !== id));
         toast.success("Blog post deleted successfully!");

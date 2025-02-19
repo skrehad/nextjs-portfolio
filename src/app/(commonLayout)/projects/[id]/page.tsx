@@ -31,7 +31,7 @@ const ProjectDetails = () => {
     const fetchProject = async () => {
       try {
         const response = await axios.get(
-          `https://portfolio-server-aeebdyebb-skrehads-projects.vercel.app/api/projects/${id}`
+          `https://rehad-portfoilo.vercel.app/api/projects/${id}`
         );
         const projectData = response.data;
 
