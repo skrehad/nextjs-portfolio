@@ -19,7 +19,7 @@ const LoginPage = () => {
             className="w-full flex items-center justify-center bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
             onClick={() =>
               signIn("google", {
-                // callbackUrl: "https://rehad-portfoilo.vercel.app/dashboard",
+                callbackUrl: "https://rehad-portfoilo.vercel.app/dashboard",
               })
             }
           >
@@ -37,7 +37,7 @@ const LoginPage = () => {
             className="w-full flex items-center justify-center bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
             onClick={() =>
               signIn("github", {
-                // callbackUrl: "https://rehad-portfoilo.vercel.app/dashboard",
+                callbackUrl: "https://rehad-portfoilo.vercel.app/dashboard",
               })
             }
           >

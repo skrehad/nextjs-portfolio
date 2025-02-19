@@ -33,7 +33,7 @@ const Services = () => {
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-20">
           {/* Left Section */}
           <motion.div
-            variants={fadeIn("up", 0.3)}
+            variants={fadeIn("left", 0.2)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.7 }}
@@ -57,7 +57,7 @@ const Services = () => {
 
           {/* Right Section */}
           <motion.div
-            variants={fadeIn("left", 0.5)}
+            variants={fadeIn("right", 0.2)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.7 }}

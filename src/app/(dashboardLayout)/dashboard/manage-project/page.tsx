@@ -59,13 +59,13 @@ const ManageProject = () => {
         Manage Projects
       </h2>
       <div className="space-y-4">
-        {projects.map((project) => (
+        {projects?.map((project) => (
           <div
             key={project._id}
             className="bg-gray-800 p-4 rounded-lg text-white flex items-center space-x-4 flex-wrap"
           >
             <img
-              src={project.images[0]}
+              src={project.images}
               alt={project.name}
               className="w-16 h-16 object-cover rounded sm:w-24 sm:h-24 md:w-32 md:h-32"
             />
