@@ -27,6 +27,8 @@ const ManageProject = () => {
     fetchProjects();
   }, []);
 
+  // console.log(projects);
+
   const deleteProject = async (id: string) => {
     if (
       typeof window !== "undefined" &&
@@ -65,7 +67,7 @@ const ManageProject = () => {
             className="bg-gray-800 p-4 rounded-lg text-white flex items-center space-x-4 flex-wrap"
           >
             <img
-              src={project.images}
+              src={project.image}
               alt={project.name}
               className="w-16 h-16 object-cover rounded sm:w-24 sm:h-24 md:w-32 md:h-32"
             />
