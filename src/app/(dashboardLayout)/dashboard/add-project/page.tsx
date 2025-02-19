@@ -77,7 +77,7 @@ export default function AddProject() {
       console.log(projectData);
 
       await axios.post(
-        "https://portfolio-server-1v4q61t0o-skrehads-projects.vercel.app/api/projects",
+        "https://portfolio-server-aeebdyebb-skrehads-projects.vercel.app/api/projects",
         projectData,
         {
           headers: {

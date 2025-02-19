@@ -24,7 +24,7 @@ const ProjectsPage = () => {
     const fetchProjects = async () => {
       try {
         const response = await axios.get(
-          "https://portfolio-server-1v4q61t0o-skrehads-projects.vercel.app/api/projects"
+          "https://portfolio-server-aeebdyebb-skrehads-projects.vercel.app/api/projects"
         );
         setProjects(response.data);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

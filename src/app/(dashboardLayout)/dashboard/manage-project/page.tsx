@@ -15,7 +15,7 @@ const ManageProject = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          "https://portfolio-server-1v4q61t0o-skrehads-projects.vercel.app/api/projects"
+          "https://portfolio-server-aeebdyebb-skrehads-projects.vercel.app/api/projects"
         );
         setProjects(response.data);
       } catch (error: any) {
@@ -34,7 +34,7 @@ const ManageProject = () => {
     ) {
       try {
         await axios.delete(
-          `https://portfolio-server-1v4q61t0o-skrehads-projects.vercel.app/api/projects/${id}`
+          `https://portfolio-server-aeebdyebb-skrehads-projects.vercel.app/api/projects/${id}`
         );
         setProjects(projects.filter((project) => project._id !== id));
         toast.success("Project deleted successfully!");
